@@ -37,7 +37,7 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
     res.render('help', {
-        msg: 'this is some help msg:)',
+        msg: 'If you are getting any another data which you might not expect, be more specific about your address!',
         title: 'Help',
         name: 'Viren Kathiriya'
     })
@@ -48,8 +48,12 @@ app.get('/weather', (req, res) => {
             error: 'You must provide address'
         })
     }
-    
-    geoCode(req.query.address, (error, { latitude, longitude, location } = {}) => {
+
+    geoCode(req.query.address, (error, {
+        latitude,
+        longitude,
+        location
+    } = {}) => {
         if (error) {
             return res.send({
                 error
@@ -63,9 +67,9 @@ app.get('/weather', (req, res) => {
                 })
             }
             res.send({
-                forecast:forecastData,
+                forecast: forecastData,
                 location,
-                address:req.query.address
+                address: req.query.address
             })
         })
     })
